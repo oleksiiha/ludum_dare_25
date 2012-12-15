@@ -16,6 +16,7 @@
             this.ctx = this.el.getContext('2d');
             this.el.width = this.options.layerData.width * this.options.tsData[0].tilewidth;
             this.el.height = this.options.layerData.height * this.options.tsData[0].tilewidth;
+            this.el.id = this.options.layerData.name;
         },
 
         pickTile: function (id, x, y) {
@@ -49,16 +50,21 @@
         },
 
         render: function () {
-            var self = this;
-            _.each(this.options.layerData.data, function (columns, x) {
-                _.each(columns, function (value, y) {
-                    var tile = self.pickTile(value, x, y);
+            var self = this,
+                data = this.options.layerData.data,
+                width = data.length,
+                height;
+
+            for (var x = 0; x < width; x++) {
+                height = data[x].length;
+                for (var y = 0; y < height; y++) {
+                    var tile = this.pickTile(data[x][y], x, y);
                     console.log(tile);
                     if (!_.isNull(tile)) {
-                        self.ctx.drawImage.apply(self.ctx, tile);
+                        this.ctx.drawImage.apply(self.ctx, tile);
                     }
-                });
-            });
+                }
+            }
 
             return this;
         }
