@@ -1,8 +1,11 @@
 (function () {
 	'use strict';
 
-	var Application, Drawer, Layer, Room, Map,
-		app, assets = [];
+	var Application, Drawer, Layer, Room, Map, LayerModel,
+		app, assets = [],
+        layerTypes = ['back', 'collision', 'interactive'];
+
+    LayerModel = Backbone.Model.extend();
 
     Layer = Backbone.View.extend({
         tagName: 'canvas',
@@ -32,11 +35,9 @@
 
             _.each(room.layers, function (layer, index) {
                 var newData = [],
-                    x = 0,
-                    y = 0,
                     counter = 0;
-                for (x; x < room.width; x++) {
-                    for (y; y < room.height; y++) {
+                for (var x = 0; x < room.width; x++) {
+                    for (var y = 0; y < room.height; y++) {
                         if (_.isUndefined(newData[x])) {
                             newData[x] = [];
                         }
@@ -51,8 +52,42 @@
         }
     });
 
-    Map = Backbone.Model.extend({
+    Map = Backbone.View.extend({
+        tagName: 'div',
+        id: "layers-container",
+        layers: [],
 
+        initialize: function () {
+            var self = this;
+            _.each(layerTypes, function (layerType) {
+                var layer = {
+                        name: layerType,
+                        data: []
+                    };
+                _.each(self.options.rooms, function (room, index) {
+                    var fragment = _.where(room.layers, {name: layerType})[0].data;
+                    for (var x = 0; x < room.width; x++) {
+                        for (var y = 0; y < room.height; y++) {
+                            var globalChankX = index % 3,
+                                globalChankY = Math.floor(index / 3),
+                                globalX = globalChankX * room.width + x,
+                                globalY = globalChankY * room.height + y;
+                            if (_.isUndefined(layer.data[globalX])) {
+                                layer.data[globalX] = [];
+                            }
+                            layer.data[globalX][globalY] = fragment[x][y];
+                        }
+                    }
+                });
+            });
+            console.log('<---- Map ready!');
+
+
+        },
+
+        render: function () {
+            return this;
+        }
     });
 
 	Drawer = Backbone.View.extend({
@@ -66,8 +101,8 @@
                 var room = new Room({variants: roomVariants});
                 rooms.push(room.getRoom());
             });
-            console.log(rooms);
-            map = new Map(rooms);
+            map = new Map({rooms: rooms});
+            this.$el.append(map.el);
 			return this;
 		}
 	});
