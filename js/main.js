@@ -11,10 +11,55 @@
         tagName: 'canvas',
 
         initialize: function () {
+            _.bindAll(this);
+            console.log(this.options);
+            this.ctx = this.el.getContext('2d');
+            this.el.width = this.options.layerData.width * this.options.tsData[0].tilewidth;
+            this.el.height = this.options.layerData.height * this.options.tsData[0].tilewidth;
+        },
 
+        pickTile: function (id, x, y) {
+            var self = this,
+                tileset,
+                probts,
+                actualts,
+                tile = [];
+            probts = _.filter(self.options.tsData, function (ts) {
+                return id >= ts.firstgid;
+            });
+
+            actualts = probts[probts.length - 1];
+            if (!_.isUndefined(actualts)) {
+                var tw = this.options.tsData[0].tilewidth,
+                    deltaid = actualts.firstgid - id;
+                tile.push(actualts.img,
+                    0,
+                    0,
+                    tw,
+                    tw,
+                    x * tw,
+                    y * tw,
+                    tw,
+                    tw);
+            } else {
+                tile = null;
+            }
+
+            return tile;
         },
 
         render: function () {
+            var self = this;
+            _.each(this.options.layerData.data, function (columns, x) {
+                _.each(columns, function (value, y) {
+                    var tile = self.pickTile(value, x, y);
+                    console.log(tile);
+                    if (!_.isNull(tile)) {
+                        self.ctx.drawImage.apply(self.ctx, tile);
+                    }
+                });
+            });
+
             return this;
         }
     });
@@ -56,9 +101,16 @@
         tagName: 'div',
         id: "layers-container",
         layers: [],
+        tilesets: null,
 
         initialize: function () {
-            var self = this;
+            _.bindAll(this);
+
+            var self = this,
+                images = [];
+
+            self.tilesets = self.options.rooms[0].tilesets;
+
             _.each(layerTypes, function (layerType) {
                 var layer = {
                         name: layerType,
@@ -66,6 +118,10 @@
                     };
                 _.each(self.options.rooms, function (room, index) {
                     var fragment = _.where(room.layers, {name: layerType})[0].data;
+                    _.extend(layer, {
+                        width: room.width * 3,
+                        height: room.height * 3
+                    });
                     for (var x = 0; x < room.width; x++) {
                         for (var y = 0; y < room.height; y++) {
                             var globalChankX = index % 3,
@@ -79,13 +135,40 @@
                         }
                     }
                 });
+
+                self.layers.push(layer);
             });
+
             console.log('<---- Map ready!');
 
+            _.each(this.tilesets, function (tileset) {
+                var imgLoad = new $.Deferred,
+                    img = new Image(),
+                    fileA = tileset.image.split(/\//),
+                    fileName = fileA[fileA.length -1];
 
+                images.push(imgLoad);
+                img.onload = imgLoad.resolve;
+                tileset.img = img;
+                img.src = 'assets/tiles/' + fileName;
+            });
+
+            $.when.apply($, images).done(self.render);
         },
 
         render: function () {
+            console.log('<---- Tilesets loaded');
+
+            var self = this;
+
+            _.each(this.layers, function(layer) {
+                var layerView = new Layer({
+                    layerData: layer,
+                    tsData: self.tilesets
+                });
+                self.$el.append(layerView.render().el);
+            });
+
             return this;
         }
     });
