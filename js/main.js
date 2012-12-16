@@ -32,10 +32,11 @@
             actualts = probts[probts.length - 1];
             if (!_.isUndefined(actualts)) {
                 var tw = this.options.tsData[0].tilewidth,
-                    deltaid = actualts.firstgid - id;
+                    deltaid = id - actualts.firstgid,
+                    imgtWidth = Math.floor(actualts.imagewidth / tw);
                 tile.push(actualts.img,
-                    0,
-                    0,
+                    (deltaid % imgtWidth) * tw,
+                    Math.floor(deltaid / imgtWidth) * tw,
                     tw,
                     tw,
                     x * tw,
@@ -59,7 +60,6 @@
                 height = data[x].length;
                 for (var y = 0; y < height; y++) {
                     var tile = this.pickTile(data[x][y], x, y);
-                    console.log(tile);
                     if (!_.isNull(tile)) {
                         this.ctx.drawImage.apply(self.ctx, tile);
                     }
