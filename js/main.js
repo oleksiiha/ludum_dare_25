@@ -22,15 +22,18 @@
             if (this.keyFlag) {
                 return false;
             }
+            if (_.indexOf([38, 39, 40, 37], evt.keyCode) === -1) {
+                return true;
+            }
             this.keyFlag = true;
-            var currentOffset = this.$el.offset(),
-                x = currentOffset.left,
-                y = currentOffset.top,
+            var x = parseInt(this.$el.css('left'), 10),
+                y = parseInt(this.$el.css('top'), 10),
                 tileSize = 32,
                 moveObj = {},
                 self = this;
 
-            switch(event.keyCode) {
+
+            switch(evt.keyCode) {
                 case 38: //up
                     moveObj.top = y - tileSize;
                     break;
@@ -46,11 +49,17 @@
                 default:
                     this.keyFlag = false;
             }
-            event.preventDefault();
+            evt.preventDefault();
 
             if (this.keyFlag) {
                 this.$el.animate(moveObj, 100, 'linear', function () {
                     self.keyFlag = false;
+                });
+                x = parseInt(this.$el.css('left'), 10);
+                y = parseInt(this.$el.css('top'), 10);
+                this.options.map.scrollMap({
+                    left: x,
+                    top: y
                 });
             }
         },
@@ -170,7 +179,8 @@
             _.bindAll(this);
 
             var self = this,
-                images = [];
+                images = [],
+                exlayer, exts;
 
             self.tilesets = self.options.rooms[0].tilesets;
 
@@ -201,6 +211,11 @@
 
                 self.layers.push(layer);
             });
+
+            exlayer = this.layers[0];
+            exts = this.tilesets[0];
+            this.$el.width(exlayer.width * exts.tilewidth);
+            this.$el.height(exlayer.height * exts.tilewidth);
 
             console.log('<---- Map ready!');
 
@@ -233,6 +248,28 @@
             });
 
             return this;
+        },
+
+        scrollMap: function (coors) {
+            var $parent = this.$el.parent(),
+                halphTop = $parent.height() / 2,
+                halphLeft = $parent.width() / 2,
+                fullTop = 0, fullLeft = 0,
+                fullBottom = this.$el.height() - $parent.height(),
+                fullRight = this.$el.width() - $parent.width(),
+                topDelta = coors.top - halphTop >= fullTop ? coors.top - halphTop : 0,
+                leftDelta = coors.left - halphLeft >= fullLeft ? coors.left - halphLeft : 0,
+                moveTo;
+
+            topDelta = topDelta >= fullBottom ? fullBottom : topDelta;
+            leftDelta = leftDelta >= fullRight ? fullRight : leftDelta;
+            moveTo = {
+                top: - topDelta,
+                left: - leftDelta
+            }
+            console.log(this.$el.height(), $parent.height());
+
+            this.$el.animate(moveTo, 100, 'linear', function() {});
         }
     });
 
@@ -249,8 +286,8 @@
             });
             map = new Map({rooms: rooms});
             this.$el.append(map.el);
-            player = new Player();
-            this.$el.append(player.render().el);
+            player = new Player({map: map});
+            map.$el.append(player.render().el);
             return this;
         }
     });

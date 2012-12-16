@@ -1,16 +1,18 @@
 @import "bootstrap/bootstrap.less";
 
 #container {
-  .square(100%);
-  overflow: auto;
-  position: absolute;
+  .size(600px, 800px);
+  overflow: hidden;
+  position: relative;
+  margin: 10px;
+  box-shadow: 0 0 15px black;
+  border: 1px solid gray;
 }
 
 #layers-container {
   position: absolute;
   top: 0;
   left: 0;
-  .square(100%);
 
   canvas {
     position: absolute;
@@ -27,6 +29,7 @@
   width: 64px;
   box-shadow: 0 0 10px black;
   border-radius: 15px;
+  z-index: 10000;
 }
 
  
