@@ -87,8 +87,8 @@
             _.each(room.layers, function (layer, index) {
                 var newData = [],
                     counter = 0;
-                for (var x = 0; x < room.width; x++) {
-                    for (var y = 0; y < room.height; y++) {
+                for (var y = 0; y < room.height; y++) {
+                    for (var x = 0; x < room.width; x++) {
                         if (_.isUndefined(newData[x])) {
                             newData[x] = [];
                         }
