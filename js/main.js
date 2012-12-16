@@ -8,6 +8,10 @@
     Player = Backbone.View.extend({
         tagName: "div",
         id: "player",
+        pos: {
+            x: 3,
+            y: 9
+        },
 
         initialize: function () {
             _.bindAll(this);
@@ -15,6 +19,8 @@
         },
 
         render: function () {
+            console.log('<---- Player ready!');
+
             return this;
         },
 
@@ -30,21 +36,26 @@
                 y = parseInt(this.$el.css('top'), 10),
                 tileSize = 32,
                 moveObj = {},
-                self = this;
+                self = this,
+                newPos = _.clone(this.pos);
 
 
             switch(evt.keyCode) {
                 case 38: //up
                     moveObj.top = y - tileSize;
+                    newPos.y -= 1;
                     break;
                 case 39: //right
                     moveObj.left = x + tileSize;
+                    newPos.x += 1;
                     break;
                 case 40: //down
                     moveObj.top = y + tileSize;
+                    newPos.y += 1;
                     break;
                 case 37: //left
                     moveObj.left = x - tileSize;
+                    newPos.x -= 1;
                     break;
                 default:
                     this.keyFlag = false;
@@ -52,20 +63,21 @@
             evt.preventDefault();
 
             if (this.keyFlag) {
-                this.$el.animate(moveObj, 100, 'linear', function () {
-                    self.keyFlag = false;
-                });
-                x = parseInt(this.$el.css('left'), 10);
-                y = parseInt(this.$el.css('top'), 10);
-                this.options.map.scrollMap({
-                    left: x,
-                    top: y
-                });
+                if (this.options.map.checkCollisions(newPos)) {
+                    this.pos = newPos;
+                    this.$el.animate(moveObj, 100, 'linear', function () {
+                        self.keyFlag = false;
+                    });
+                    x = parseInt(this.$el.css('left'), 10);
+                    y = parseInt(this.$el.css('top'), 10);
+                    this.options.map.scrollMap({
+                        left: x,
+                        top: y
+                    });
+                } else {
+                    this.keyFlag = false
+                }
             }
-        },
-
-        move: function () {
-
         }
     });
 
@@ -266,10 +278,22 @@
             moveTo = {
                 top: - topDelta,
                 left: - leftDelta
-            }
-            console.log(this.$el.height(), $parent.height());
+            };
 
             this.$el.animate(moveTo, 100, 'linear', function() {});
+        },
+
+        checkCollisions: function (pos) {
+            console.log(pos);
+            var hasCollision = false;
+            _.each(this.layers, function (layer) {
+                if (layer.name !== "back") {
+                    if (layer.data[pos.x][pos.y] !== 0) {
+                        hasCollision = true;
+                    }
+                }
+            });
+            return !hasCollision;
         }
     });
 
