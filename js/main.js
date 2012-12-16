@@ -35,10 +35,12 @@
                     deltaid = id - actualts.firstgid,
                     imgtWidth = Math.floor(actualts.imagewidth / tw);
                 tile.push(actualts.img,
+                    // image offset
                     (deltaid % imgtWidth) * tw,
                     Math.floor(deltaid / imgtWidth) * tw,
                     tw,
                     tw,
+                    // canvas offset
                     x * tw,
                     y * tw,
                     tw,
