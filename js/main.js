@@ -1,8 +1,8 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	var Application, Drawer, Layer, Room, Map, LayerModel,
-		app, assets = [],
+    var Application, Drawer, Layer, Room, Map, LayerModel,
+        app, assets = [],
         layerTypes = ['back', 'collision', 'interactive'];
 
     LayerModel = Backbone.Model.extend();
@@ -179,12 +179,12 @@
         }
     });
 
-	Drawer = Backbone.View.extend({
-		initialize: function () {
+    Drawer = Backbone.View.extend({
+        initialize: function () {
             this.setElement($('#container'));
-		},
+        },
 
-		render: function () {
+        render: function () {
             var rooms = [], map;
             _.each(this.options.resources, function (roomVariants) {
                 var room = new Room({variants: roomVariants});
@@ -192,14 +192,14 @@
             });
             map = new Map({rooms: rooms});
             this.$el.append(map.el);
-			return this;
-		}
-	});
+            return this;
+        }
+    });
 
-	Application = Backbone.Model.extend({
-		initialize: function () {
-			_.bindAll(this);
-			var getRess  = [],
+    Application = Backbone.Model.extend({
+        initialize: function () {
+            _.bindAll(this);
+            var getRess  = [],
                 self = this,
                 room,
                 roomInd,
@@ -216,16 +216,16 @@
                     }(room, roomInd));
                 }
             }
-			$.when.apply($, getRess).done(this.resoucesReady);
-		},
+            $.when.apply($, getRess).done(this.resoucesReady);
+        },
 
-		resoucesReady: function () {
-			console.log('<---- Resources ready!');
-			this.drawer = new Drawer({resources: this.resources});
-			this.drawer.render();
-		}
-	});
+        resoucesReady: function () {
+            console.log('<---- Resources ready!');
+            this.drawer = new Drawer({resources: this.resources});
+            this.drawer.render();
+        }
+    });
 
-	app = new Application();
+    app = new Application();
 
 }());
