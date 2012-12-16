@@ -1,9 +1,64 @@
 (function () {
     'use strict';
 
-    var Application, Drawer, Layer, Room, Map, LayerModel,
+    var Application, Drawer, Layer, Room, Map, LayerModel, Player,
         app, assets = [],
         layerTypes = ['back', 'collision', 'interactive'];
+
+    Player = Backbone.View.extend({
+        tagName: "div",
+        id: "player",
+
+        initialize: function () {
+            _.bindAll(this);
+            $(document).on('keydown', this.keysHandler);
+        },
+
+        render: function () {
+            return this;
+        },
+
+        keysHandler: function (evt) {
+            if (this.keyFlag) {
+                return false;
+            }
+            this.keyFlag = true;
+            var currentOffset = this.$el.offset(),
+                x = currentOffset.left,
+                y = currentOffset.top,
+                tileSize = 32,
+                moveObj = {},
+                self = this;
+
+            switch(event.keyCode) {
+                case 38: //up
+                    moveObj.top = y - tileSize;
+                    break;
+                case 39: //right
+                    moveObj.left = x + tileSize;
+                    break;
+                case 40: //down
+                    moveObj.top = y + tileSize;
+                    break;
+                case 37: //left
+                    moveObj.left = x - tileSize;
+                    break;
+                default:
+                    this.keyFlag = false;
+            }
+            event.preventDefault();
+
+            if (this.keyFlag) {
+                this.$el.animate(moveObj, 100, 'linear', function () {
+                    self.keyFlag = false;
+                });
+            }
+        },
+
+        move: function () {
+
+        }
+    });
 
     LayerModel = Backbone.Model.extend();
 
@@ -187,13 +242,15 @@
         },
 
         render: function () {
-            var rooms = [], map;
+            var rooms = [], map, player;
             _.each(this.options.resources, function (roomVariants) {
                 var room = new Room({variants: roomVariants});
                 rooms.push(room.getRoom());
             });
             map = new Map({rooms: rooms});
             this.$el.append(map.el);
+            player = new Player();
+            this.$el.append(player.render().el);
             return this;
         }
     });
