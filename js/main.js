@@ -73,9 +73,9 @@
     });
 
     Room = Backbone.Model.extend({
-        variants: [],
         initialize: function () {
             _.bindAll(this);
+            this.variants = [];
             _.each(this.get('variants'), this.convertRoom);
         },
 
@@ -210,10 +210,17 @@
             for (room = 1; room <= 9; room++) {
                 for (roomInd = 1; roomInd <= 3; roomInd++) {
                     (function (room, roomInd) {
-                        if (_.isUndefined(self.resources[room])) {
-                            self.resources[room] = [];
+                        if (_.isUndefined(self.resources[room-1])) {
+                            self.resources[room-1] = [];
                         }
-                        getRess[count] = $.get('assets/data/room_' + room + '_' + roomInd + '.json', function (answer) { self.resources[room].push(answer); });
+                        var fileIndex = room + '_' + roomInd;
+                        getRess[count] = $.get(
+                            'assets/data/room_' + fileIndex + '.json',
+                            function (answer) {
+                                answer.fileIndex = fileIndex;
+                                self.resources[room-1].push(answer);
+                            }
+                        );
                         count++;
                     }(room, roomInd));
                 }
@@ -222,7 +229,7 @@
         },
 
         resoucesReady: function () {
-            console.log('<---- Resources ready!');
+            console.log('<---- Resources ready!', this.resources);
             this.drawer = new Drawer({resources: this.resources});
             this.drawer.render();
         }
