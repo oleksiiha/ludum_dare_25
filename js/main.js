@@ -1,6 +1,12 @@
 (function () {
     'use strict';
 
+    _.mixin({
+        isSet: function (param) {
+            return !_.isUndefined(param);
+        }
+    });
+
     var Application, Drawer, Layer, Room, Map, LayerModel, Player,
         app, assets = [],
         layerTypes = ['back', 'collision', 'interactive'];
@@ -37,21 +43,28 @@
                 tileSize = 32,
                 moveObj = {},
                 self = this,
-                newPos = _.clone(this.pos);
+                newPos = _.clone(this.pos),
+                cc = this.options.map.checkCollisions;
 
+            if (_.isSet(newPos.wa)) {
+                delete newPos.wa;
+            }
 
             switch(evt.keyCode) {
                 case 38: //up
                     moveObj.top = y - tileSize;
                     newPos.y -= 1;
+                    newPos.wa = 1;
                     break;
                 case 39: //right
                     moveObj.left = x + tileSize;
                     newPos.x += 1;
+                    newPos.wa = 1; //width accuracy
                     break;
                 case 40: //down
                     moveObj.top = y + tileSize;
                     newPos.y += 1;
+                    newPos.wa = 1;
                     break;
                 case 37: //left
                     moveObj.left = x - tileSize;
@@ -63,7 +76,7 @@
             evt.preventDefault();
 
             if (this.keyFlag) {
-                if (this.options.map.checkCollisions(newPos)) {
+                if (cc(newPos) && cc({x: newPos.x + 1, y: newPos.y})) {
                     this.pos = newPos;
                     this.$el.animate(moveObj, 100, 'linear', function () {
                         self.keyFlag = false;
@@ -284,7 +297,6 @@
         },
 
         checkCollisions: function (pos) {
-            console.log(pos);
             var hasCollision = false;
             _.each(this.layers, function (layer) {
                 if (layer.name !== "back") {
