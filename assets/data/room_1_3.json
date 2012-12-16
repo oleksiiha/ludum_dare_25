@@ -1,7 +1,7 @@
 { "height":12,
  "layers":[
         {
-         "data":[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+         "data":[381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 389, 389, 390, 391, 403, 0, 0, 395, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 0, 761, 762, 763, 764, 765, 766, 767, 768, 769, 768, 769, 770, 771, 0, 772, 773, 774, 775, 776, 777, 778, 779, 780, 779, 780, 781, 782, 0, 783, 784, 785, 786, 787, 788, 789, 790, 791, 790, 791, 792, 793, 0, 794, 795, 796, 797, 798, 799, 800, 801, 802, 801, 802, 803, 804, 0, 805, 806, 807, 808, 809, 810, 811, 812, 813, 812, 813, 814, 815, 0, 816, 817, 818, 819, 820, 821, 822, 823, 824, 823, 824, 825, 826, 0, 827, 828, 829, 830, 831, 832, 833, 834, 835, 834, 835, 836, 837, 0, 838, 839, 840, 841, 842, 843, 844, 845, 846, 845, 846, 847, 848, 0, 849, 850, 851, 852, 3, 854, 855, 3, 857, 856, 857, 858, 859, 0, 860, 861, 862, 863, 3, 3, 3, 3, 868, 867, 868, 869, 870],
          "height":12,
          "name":"back",
          "opacity":1,
@@ -12,7 +12,7 @@
          "y":0
         }, 
         {
-         "data":[5, 6, 7, 8, 8, 8, 8, 8, 8, 14, 15, 15, 16, 17, 18, 19, 20, 21, 21, 21, 21, 21, 21, 27, 28, 28, 29, 30, 31, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 43, 44, 0, 0, 3, 3, 0, 0, 0, 3, 3, 0, 0, 0, 56, 57, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 69, 57, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0, 0, 0, 69, 122, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0, 0, 0, 69, 122, 0, 0, 3, 3, 0, 0, 0, 3, 3, 0, 0, 0, 69, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 122, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 134, 135, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 147, 148, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160],
+         "data":[491, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 502, 503, 515, 492, 504, 505, 506, 507, 508, 509, 510, 511, 512, 513, 513, 514, 516, 517, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 527, 518, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 528, 519, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 529, 520, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 530, 521, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 522, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 523, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 533, 524, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 534, 525, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 535, 526, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 536],
          "height":12,
          "name":"collision",
          "opacity":1,
@@ -23,7 +23,7 @@
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 537, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 538, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 539, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 540, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":12,
          "name":"interactive",
          "opacity":1,
@@ -107,6 +107,261 @@
          "imagewidth":420,
          "margin":0,
          "name":"5",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":161,
+         "image":"..\/tiles\/floor_1.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_1",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":271,
+         "image":"..\/tiles\/floor_2.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_2",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":381,
+         "image":"..\/tiles\/floor_3.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_3",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":491,
+         "image":"..\/tiles\/wall_corner_l.png",
+         "imageheight":64,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_corner_l",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":493,
+         "image":"..\/tiles\/wall_t.png",
+         "imageheight":64,
+         "imagewidth":352,
+         "margin":0,
+         "name":"wall_t",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":515,
+         "image":"..\/tiles\/wall_corner_r.png",
+         "imageheight":64,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_corner_r",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":517,
+         "image":"..\/tiles\/wall_l.png",
+         "imageheight":320,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_l",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":527,
+         "image":"..\/tiles\/wall_r.png",
+         "imageheight":320,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_r",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":537,
+         "image":"..\/tiles\/wall_door_r.png",
+         "imageheight":128,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_door_r",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":541,
+         "image":"..\/tiles\/floor_4.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_4",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":651,
+         "image":"..\/tiles\/floor_5.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_5",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":761,
+         "image":"..\/tiles\/floor_6.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_6",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":871,
+         "image":"..\/tiles\/floor_7.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_7",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":981,
+         "image":"..\/tiles\/floor_8.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_8",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":1091,
+         "image":"..\/tiles\/floor_9.png",
+         "imageheight":320,
+         "imagewidth":352,
+         "margin":0,
+         "name":"floor_9",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":1201,
+         "image":"..\/tiles\/wall_door_t.png",
+         "imageheight":64,
+         "imagewidth":128,
+         "margin":0,
+         "name":"wall_door_t",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":1209,
+         "image":"..\/tiles\/wall_door_l.png",
+         "imageheight":128,
+         "imagewidth":32,
+         "margin":0,
+         "name":"wall_door_l",
          "properties":
             {
 

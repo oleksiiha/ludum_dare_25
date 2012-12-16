@@ -9,10 +9,11 @@
 
     var Application, Drawer, Layer, Room, Map, LayerModel, Player, AI,
         app, assets = [],
-        layerTypes = ['back', 'collision', 'interactive'];
+        layerTypes = ['back', 'collision', 'interactive'],
+        tileSize = 32;
 
     AI = Backbone.View.extend({
-        points: [{x: 10, y: 3}],
+        points: [{x: 9, y: 2}],
         pos: {
             x: 3,
             y: 10
@@ -33,12 +34,34 @@
         },
 
         move: function () {
-            var start, current, end;
+            var start, current, end, cp;
             if (_.isNull(this.currentPath)) {
-                start = this.graph.nodes[this.pos.y][this.pos.x];
-                end = this.graph.nodes[this.points[0].y][this.points[0].x];
-                this.currentPath = astar.search(this.graph.nodes, start, end, true);
+                if (this.points.length !== 0) {
+                    this.currentPoint = this.points.pop();
+                    console.log(this.pos);
+                    start = this.graph.nodes[this.pos.y][this.pos.x];
+                    end = this.graph.nodes[this.currentPoint.y][this.currentPoint.x];
+                    this.currentPath = astar.search(this.graph.nodes, start, end);
+                    if (this.currentPath.length === 0) {
+                        console.error("Path not found!");
+                        this.currentPath = null;
+                        return;
+                    }
+                } else {
+                    return;
+                }
             }
+
+            if (this.currentPath.length === 0) {
+                this.pos = this.currentPoint;
+            } else {
+                this.pos = this.currentPath.splice(this.currentPath.length-1, 1)[0];
+            }
+            this.$el.animate({
+                top: this.pos.y * tileSize - tileSize * 2,
+                left: this.pos.x * tileSize
+            }, 100);
+
             console.log(this.currentPath);
         }
     });
@@ -72,7 +95,6 @@
             this.keyFlag = true;
             var x = parseInt(this.$el.css('left'), 10),
                 y = parseInt(this.$el.css('top'), 10),
-                tileSize = 32,
                 moveObj = {},
                 self = this,
                 newPos = _.clone(this.pos),

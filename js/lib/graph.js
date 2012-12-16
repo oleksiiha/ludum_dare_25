@@ -6,8 +6,8 @@
 
 
 var GraphNodeType = { 
-    OPEN: 1,
-    WALL: 0
+    OPEN: 0,
+    WALL: 1
 };
 
 // Creates a Graph class used in the astar search algorithm.
@@ -57,7 +57,7 @@ GraphNode.prototype.toString = function() {
 };
 
 GraphNode.prototype.isWall = function() {
-    return this.type == GraphNodeType.WALL;
+    return this.type > 0;
 };
 
 
