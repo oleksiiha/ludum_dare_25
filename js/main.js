@@ -13,7 +13,11 @@
         tileSize = 32;
 
     AI = Backbone.View.extend({
-        points: [{x: 9, y: 2}],
+        points: [
+            {x: 9, y: 2},
+            {x: 16, y: 2},
+            {x: 30, y: 16}
+        ],
         pos: {
             x: 3,
             y: 10
@@ -21,6 +25,7 @@
         tagName: "div",
         id: "ai",
         currentPath: null,
+        currentPointNumber: 0,
 
         initialize: function () {
             console.log('<---- AI ready!');
@@ -36,11 +41,13 @@
         move: function () {
             var start, current, end, cp;
             if (_.isNull(this.currentPath)) {
-                if (this.points.length !== 0) {
-                    this.currentPoint = this.points.pop();
-                    console.log(this.pos);
-                    start = this.graph.nodes[this.pos.y][this.pos.x];
-                    end = this.graph.nodes[this.currentPoint.y][this.currentPoint.x];
+                console.log(this.pos);
+                if (this.currentPointNumber < this.points.length) {
+                    this.currentPoint = this.points[this.currentPointNumber];
+                    this.currentPointNumber++;
+                    start = this.graph.nodes[this.currentPoint.x][this.currentPoint.y];
+                    end = this.graph.nodes[this.pos.x][this.pos.y];
+                    console.log(this.currentPoint, start, end);
                     this.currentPath = astar.search(this.graph.nodes, start, end);
                     if (this.currentPath.length === 0) {
                         console.error("Path not found!");
@@ -48,21 +55,22 @@
                         return;
                     }
                 } else {
+                    console.log('>---- End of AI path');
                     return;
                 }
             }
 
             if (this.currentPath.length === 0) {
-                this.pos = this.currentPoint;
+                this.pos = _.clone(this.currentPoint);
+                this.currentPath = null;
             } else {
-                this.pos = this.currentPath.splice(this.currentPath.length-1, 1)[0];
+                this.pos = this.currentPath.pop();
+                console.log(this.pos);
             }
             this.$el.animate({
                 top: this.pos.y * tileSize - tileSize * 2,
                 left: this.pos.x * tileSize
             }, 100);
-
-            console.log(this.currentPath);
         }
     });
 
@@ -156,7 +164,6 @@
 
         initialize: function () {
             _.bindAll(this);
-            console.log(this.options);
             this.ctx = this.el.getContext('2d');
             this.el.width = this.options.layerData.width * this.options.tsData[0].tilewidth;
             this.el.height = this.options.layerData.height * this.options.tsData[0].tilewidth;
