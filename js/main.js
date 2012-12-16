@@ -31,7 +31,6 @@
             console.log('<---- AI ready!');
             _.bindAll(this);
             this.graph = new Graph(_.where(this.options.map.layers, {name: 'collision'})[0].data);
-            console.log(this.graph);
         },
 
         render: function () {
@@ -41,7 +40,6 @@
         move: function () {
             var start, current, end, cp;
             if (_.isNull(this.currentPath)) {
-                console.log(this.pos);
                 if (this.currentPointNumber < this.points.length) {
                     this.currentPoint = this.points[this.currentPointNumber];
                     this.currentPointNumber++;
@@ -65,7 +63,6 @@
                 this.currentPath = null;
             } else {
                 this.pos = this.currentPath.pop();
-                console.log(this.pos);
             }
             this.$el.animate({
                 top: this.pos.y * tileSize - tileSize * 2,
