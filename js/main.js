@@ -354,7 +354,7 @@
         checkCollisions: function (pos) {
             var hasCollision = false;
             _.each(this.layers, function (layer) {
-                if (layer.name !== "back") {
+                if (layer.name === "collision") {
                     if (layer.data[pos.x][pos.y] !== 0) {
                         hasCollision = true;
                     }
