@@ -7,9 +7,41 @@
         }
     });
 
-    var Application, Drawer, Layer, Room, Map, LayerModel, Player,
+    var Application, Drawer, Layer, Room, Map, LayerModel, Player, AI,
         app, assets = [],
         layerTypes = ['back', 'collision', 'interactive'];
+
+    AI = Backbone.View.extend({
+        points: [{x: 10, y: 3}],
+        pos: {
+            x: 3,
+            y: 10
+        },
+        tagName: "div",
+        id: "ai",
+        currentPath: null,
+
+        initialize: function () {
+            console.log('<---- AI ready!');
+            _.bindAll(this);
+            this.graph = new Graph(_.where(this.options.map.layers, {name: 'collision'})[0].data);
+            console.log(this.graph);
+        },
+
+        render: function () {
+            return this;
+        },
+
+        move: function () {
+            var start, current, end;
+            if (_.isNull(this.currentPath)) {
+                start = this.graph.nodes[this.pos.y][this.pos.x];
+                end = this.graph.nodes[this.points[0].y][this.points[0].x];
+                this.currentPath = astar.search(this.graph.nodes, start, end, true);
+            }
+            console.log(this.currentPath);
+        }
+    });
 
     Player = Backbone.View.extend({
         tagName: "div",
@@ -87,6 +119,7 @@
                         left: x,
                         top: y
                     });
+                    this.trigger('move');
                 } else {
                     this.keyFlag = false
                 }
@@ -315,7 +348,7 @@
         },
 
         render: function () {
-            var rooms = [], map, player;
+            var rooms = [], map, player, ai;
             _.each(this.options.resources, function (roomVariants) {
                 var room = new Room({variants: roomVariants});
                 rooms.push(room.getRoom());
@@ -324,6 +357,9 @@
             this.$el.append(map.el);
             player = new Player({map: map});
             map.$el.append(player.render().el);
+            ai = new AI({map: map});
+            map.$el.append(ai.render().$el);
+            player.on('move', ai.move);
             return this;
         }
     });
