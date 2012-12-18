@@ -331,6 +331,14 @@
                 self.$el.append(layerView.render().el);
             });
 
+            this.$pointer = $("<div></div>");
+            this.$el.append(this.$pointer);
+            this.$pointer.prop('id', 'pointer');
+
+            this.$el.on('mousemove', this.mouseOver);
+
+            this.offset = this.$el.offset();
+
             return this;
         },
 
@@ -365,6 +373,16 @@
                 }
             });
             return !hasCollision;
+        },
+
+        mouseOver: function (evt) {
+            console.log();
+            var position = {
+                left: Math.floor(evt.offsetX / tileSize) * tileSize,
+                top: Math.floor(evt.offsetY / tileSize) * tileSize
+            };
+
+            this.$pointer.css(position);
         }
     });
 

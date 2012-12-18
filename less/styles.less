@@ -19,6 +19,9 @@
     top: 0;
     left: 0;
   }
+  div {
+    pointer-events: none;
+  }
 }
 
 #player {
@@ -43,4 +46,10 @@
   z-index: 20000;
 }
 
+#pointer {
+  .size(32px, 64px);
+  box-shadow: 0 0 10px green;
+  position: absolute;
+  z-index: 5000;
+}
  
